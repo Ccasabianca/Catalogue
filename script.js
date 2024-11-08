@@ -7,62 +7,111 @@ const Produits = [
     { titre: 'Veste en cuir', image: 'assets/veste-en-cuir.jpg', alt: 'Veste en cuir', prix: 60, categorie: 'veste', attributs: ['cuir', 'marron'], note: 4.7 },
     { titre: 'Chemise à rayures', image: 'assets/chemise-rayure.jpg', alt: 'Chemise à rayures', prix: 25, categorie: 'chemise', attributs: ['rayures', 'blanc', 'bleu'], note: 4.1 },
     { titre: 'Pantalon chino', image: 'assets/pantalon-chino.jpg', alt: 'Pantalon chino', prix: 38, categorie: 'pantalon', attributs: ['chino', 'gris'], note: 4.4 },
-    { titre: 'Veste à capuche', image: 'assets/veste-a-capuche.jpg', alt: 'Veste à capuche', prix: 55, categorie: 'veste', attributs: ['capuche', 'noir'], note: 4.6 }
+    { titre: 'Veste à capuche', image: 'assets/veste-a-capuche.jpg', alt: 'Veste à capuche', prix: 55, categorie: 'veste', attributs: ['capuche', 'noir'], note: 4.6 },
+    { titre: 'T-shirt blanc', image: 'assets/tshirt-blanc.jpg', alt: 'T-shirt blanc', prix: 15, categorie: 'tshirt', attributs: ['blanc', 'coton'], note: 4.3 },
+    { titre: 'T-shirt noir', image: 'assets/tshirt-noir.jpg', alt: 'T-shirt noir', prix: 18, categorie: 'tshirt', attributs: ['noir', 'coton'], note: 4.4 },
+    { titre: 'Pull en laine', image: 'assets/pull-laine.jpg', alt: 'Pull en laine', prix: 40, categorie: 'pull', attributs: ['laine', 'gris'], note: 4.5 },
+    { titre: 'Pull à col roulé', image: 'assets/pull-col-roule.jpg', alt: 'Pull à col roulé', prix: 35, categorie: 'pull', attributs: ['col roulé', 'noir'], note: 4.0 },
+
   ];
 
+  const PRODUCTS_PER_PAGE = 9;
+  let currentPage = 1;
+  
   function displayProducts(products) {
-    const productContainer = document.getElementById('product-list');
-    productContainer.innerHTML = '';
-
-    const productsToDisplay = products.slice(0, 9);
-
-    productsToDisplay.forEach(product => {
-      const productCard = document.createElement('div');
-      productCard.classList.add('product-card');
-      productCard.innerHTML = `
-        <h4>${product.titre}</h4>
-        <img src="${product.image}" alt="${product.alt}" width="100">
-        <p>Prix: ${product.prix}€</p>
-        <p>Catégorie: <a href="#" class="category" onclick="filterByCategory('${product.categorie}')">${product.categorie}</a></p>
-        <p>Attributs: ${product.attributs.map(attr => `<a href="#" class="attribute" onclick="filterByAttribute('${attr}')">${attr}</a>`).join(', ')}</p>
-        <p>Note: ${product.note} / 5</p>
-      `;
-      productContainer.appendChild(productCard);
-    });
+      const productContainer = document.getElementById('product-list');
+      productContainer.innerHTML = '';
+  
+      // On trouve la page à afficher grâce à currentPage que nous envoie le lien en bas de la page
+      // Affiche la page 1 par défaut
+      const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
+      const endIndex = startIndex + PRODUCTS_PER_PAGE;
+      // On choisit quels produits afficher en fonction de la page
+      // Si page 1 : (1-1) x9 = 0 donc on affiche le premier produit de l'array
+      const productsToDisplay = products.slice(startIndex, endIndex);
+  
+      productsToDisplay.forEach(product => {
+          const productCard = document.createElement('div');
+          // Ajout classe CSS
+          productCard.classList.add('product-card');
+          productCard.innerHTML = `
+              <h4>${product.titre}</h4>
+              <img src="${product.image}" alt="${product.alt}" width="100">
+              <p>Prix: ${product.prix}€</p>
+              <p>Catégorie: <a href="#" class="category" onclick="filterByCategory('${product.categorie}')">${product.categorie}</a></p>
+              <p>Attributs: ${product.attributs.map(attr => `<a href="#" class="attribute" onclick="filterByAttribute('${attr}')">${attr}</a>`).join(', ')}</p>
+              <p>Note: ${product.note} / 5</p>
+          `;
+          productContainer.appendChild(productCard);
+      });
+  
+      displayPagination(products);
   }
-
-  displayProducts(Produits);
-
+  
+  function displayPagination(products) {
+      const paginationContainer = document.getElementById('pagination');
+      paginationContainer.innerHTML = '';
+  
+      // On calcule combien de pages il y a en divisant le nombre de produits par le nombre de produits par page (9 pour le moment)
+      const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
+  
+      for (let i = 1; i <= totalPages; i++) {
+          const paginationLink = document.createElement('a');
+          paginationLink.href = "#";
+          paginationLink.textContent = i;
+          paginationLink.classList.add('pagination-link');
+          if (i === currentPage) {
+              paginationLink.classList.add('active');
+          }
+          paginationLink.onclick = (e) => {
+              e.preventDefault();
+              currentPage = i;
+              displayProducts(products);
+          };
+          paginationContainer.appendChild(paginationLink);
+      }
+  }
+  
   function filterByCategory(category) {
-    const filteredProducts = category === 'all' ? Produits : Produits.filter(product => product.categorie === category);
-    displayProducts(filteredProducts);
+    // Remet à la page 1 au cas où on était sur la 2
+      currentPage = 1;
+      const filteredProducts = category === 'all' ? Produits : Produits.filter(product => product.categorie === category);
+      displayProducts(filteredProducts);
   }
-
+  
   function filterByAttribute(attribute) {
-    const filteredProducts = Produits.filter(product => product.attributs.includes(attribute));
-    displayProducts(filteredProducts);
+      currentPage = 1;
+      const filteredProducts = Produits.filter(product => product.attributs.includes(attribute));
+      displayProducts(filteredProducts);
   }
-
+  
   function searchProducts() {
-    const query = document.getElementById('search-input').value.toLowerCase();
-    if (query.length >= 3) {
-      const filteredProducts = Produits.filter(product => 
-        product.titre.toLowerCase().includes(query) || 
-        product.categorie.toLowerCase().includes(query) || 
-        product.attributs.some(attr => attr.toLowerCase().includes(query))
-      );
-      displayProducts(filteredProducts);
-    } else {
-      displayProducts(Produits);
-    }
+      currentPage = 1;
+      const query = document.getElementById('search-input').value.toLowerCase();
+      // A partir de 3 caractères, lance le tri
+      if (query.length >= 3) {
+          const filteredProducts = Produits.filter(product => 
+              product.titre.toLowerCase().includes(query) || 
+              product.categorie.toLowerCase().includes(query) || 
+              // Regarde dans l'array si un attribut correspond à la recherche
+              product.attributs.some(attr => attr.toLowerCase().includes(query))
+          );
+          displayProducts(filteredProducts);
+      } else {
+          displayProducts(Produits);
+      }
   }
-
+  
   function filterByPrice() {
-    const maxPrice = parseFloat(document.getElementById('price-filter').value);
-    if (!isNaN(maxPrice)) {
-      const filteredProducts = Produits.filter(product => product.prix <= maxPrice);
-      displayProducts(filteredProducts);
-    } else {
-      displayProducts(Produits);
-    }
+      currentPage = 1;
+      // On change la string en nombre
+      const maxPrice = parseFloat(document.getElementById('price-filter').value);
+      if (!isNaN(maxPrice)) {
+          const filteredProducts = Produits.filter(product => product.prix <= maxPrice);
+          displayProducts(filteredProducts);
+      } else {
+          displayProducts(Produits);
+      }
   }
+  
+  displayProducts(Produits);
