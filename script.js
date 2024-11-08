@@ -1,19 +1,25 @@
 const Produits = [
-    { titre: 'Chemise à carreaux', image: 'assets/chemise.jpg', alt: 'Chemise à carreaux', prix: 20, categorie: 'chemise', attributs: ['manches longues', 'carreaux'], note: 4.5 },
-    { titre: 'Pantalon slim', image: 'assets/jean.jpg', alt: 'Pantalon slim', prix: 35, categorie: 'pantalon', attributs: ['slim', 'noir'], note: 4.0 },
-    { titre: 'Veste en jean', image: 'assets/veste-en-jean.jpg', alt: 'Veste en jean', prix: 50, categorie: 'veste', attributs: ['jean', 'bleu'], note: 3.8 },
-    { titre: 'Chemise en lin', image: 'assets/chemise-lin.jpg', alt: 'Chemise en lin', prix: 30, categorie: 'chemise', attributs: ['manches courtes', 'lin'], note: 4.2 },
-    { titre: 'Pantalon cargo', image: 'assets/pantalon-cargo.jpg', alt: 'Pantalon cargo', prix: 45, categorie: 'pantalon', attributs: ['cargo', 'beige'], note: 4.3 },
-    { titre: 'Veste en cuir', image: 'assets/veste-en-cuir.jpg', alt: 'Veste en cuir', prix: 60, categorie: 'veste', attributs: ['cuir', 'marron'], note: 4.7 },
-    { titre: 'Chemise à rayures', image: 'assets/chemise-rayure.jpg', alt: 'Chemise à rayures', prix: 25, categorie: 'chemise', attributs: ['rayures', 'blanc', 'bleu'], note: 4.1 },
-    { titre: 'Pantalon chino', image: 'assets/pantalon-chino.jpg', alt: 'Pantalon chino', prix: 38, categorie: 'pantalon', attributs: ['chino', 'gris'], note: 4.4 },
-    { titre: 'Veste à capuche', image: 'assets/veste-a-capuche.jpg', alt: 'Veste à capuche', prix: 55, categorie: 'veste', attributs: ['capuche', 'noir'], note: 4.6 },
-    { titre: 'T-shirt blanc', image: 'assets/tshirt-blanc.jpg', alt: 'T-shirt blanc', prix: 15, categorie: 'tshirt', attributs: ['blanc', 'coton'], note: 4.3 },
-    { titre: 'T-shirt noir', image: 'assets/tshirt-noir.jpg', alt: 'T-shirt noir', prix: 18, categorie: 'tshirt', attributs: ['noir', 'coton'], note: 4.4 },
-    { titre: 'Pull en laine', image: 'assets/pull-laine.jpg', alt: 'Pull en laine', prix: 40, categorie: 'pull', attributs: ['laine', 'gris'], note: 4.5 },
-    { titre: 'Pull à col roulé', image: 'assets/pull-col-roule.jpg', alt: 'Pull à col roulé', prix: 35, categorie: 'pull', attributs: ['col roulé', 'noir'], note: 4.0 },
-
-  ];
+  { titre: 'Chemise à carreaux', image: 'assets/chemise.jpg', alt: 'Chemise à carreaux', prix: 20, categorie: 'chemise', attributs: ['manches longues', 'carreaux'], note: 4.5 },
+  { titre: 'Pantalon slim', image: 'assets/jean.jpg', alt: 'Pantalon slim', prix: 35, categorie: 'pantalon', attributs: ['slim', 'noir'], note: 4.0 },
+  { titre: 'Veste en jean', image: 'assets/veste-en-jean.jpg', alt: 'Veste en jean', prix: 50, categorie: 'veste', attributs: ['jean', 'bleu'], note: 3.8 },
+  { titre: 'Chemise en lin', image: 'assets/chemise-lin.jpg', alt: 'Chemise en lin', prix: 30, categorie: 'chemise', attributs: ['manches courtes', 'lin'], note: 4.2 },
+  { titre: 'Pantalon cargo', image: 'assets/pantalon-cargo.jpg', alt: 'Pantalon cargo', prix: 45, categorie: 'pantalon', attributs: ['cargo', 'beige'], note: 4.3 },
+  { titre: 'Veste en cuir', image: 'assets/veste-en-cuir.jpg', alt: 'Veste en cuir', prix: 60, categorie: 'veste', attributs: ['cuir', 'marron'], note: 4.7 },
+  { titre: 'Chemise à rayures', image: 'assets/chemise-rayure.jpg', alt: 'Chemise à rayures', prix: 25, categorie: 'chemise', attributs: ['rayures', 'blanc', 'bleu'], note: 4.1 },
+  { titre: 'Pantalon chino', image: 'assets/pantalon-chino.jpg', alt: 'Pantalon chino', prix: 38, categorie: 'pantalon', attributs: ['chino', 'gris'], note: 4.4 },
+  { titre: 'Veste à capuche', image: 'assets/veste-a-capuche.jpg', alt: 'Veste à capuche', prix: 55, categorie: 'veste', attributs: ['capuche', 'noir'], note: 4.6 },
+  { titre: 'T-shirt blanc', image: 'assets/tshirt-blanc.jpg', alt: 'T-shirt blanc', prix: 15, categorie: 'tshirt', attributs: ['blanc', 'coton'], note: 4.3 },
+  { titre: 'T-shirt noir', image: 'assets/tshirt-noir.jpg', alt: 'T-shirt noir', prix: 18, categorie: 'tshirt', attributs: ['noir', 'coton'], note: 4.4 },
+  { titre: 'Pull en laine', image: 'assets/pull-laine.jpg', alt: 'Pull en laine', prix: 40, categorie: 'pull', attributs: ['laine', 'gris'], note: 4.5 },
+  { titre: 'Pull à col roulé', image: 'assets/pull-col-roule.jpg', alt: 'Pull à col roulé', prix: 35, categorie: 'pull', attributs: ['col roulé', 'noir'], note: 4.0 },
+  { titre: 'Chemise hawaïenne', image: 'assets/chemise-hawaienne.jpg', alt: 'Chemise hawaïenne', prix: 28, categorie: 'chemise', attributs: ['colorée', 'vacances'], note: 4.2 },
+  { titre: 'Pantalon de jogging', image: 'assets/pantalon-jogging.jpg', alt: 'Pantalon de jogging', prix: 30, categorie: 'pantalon', attributs: ['confort', 'noir'], note: 4.6 },
+  { titre: 'Veste coupe-vent', image: 'assets/veste-coupe-vent.jpg', alt: 'Veste coupe-vent', prix: 48, categorie: 'veste', attributs: ['léger', 'bleu'], note: 4.4 },
+  { titre: 'Chemise habillée', image: 'assets/chemise-habillee.jpg', alt: 'Chemise habillée', prix: 40, categorie: 'chemise', attributs: ['formelle', 'blanche'], note: 4.5 },
+  { titre: 'Pantalon de costume', image: 'assets/pantalon-costume.jpg', alt: 'Pantalon de costume', prix: 55, categorie: 'pantalon', attributs: ['formel', 'noir'], note: 4.7 },
+  { titre: 'Veste de sport', image: 'assets/veste-sport.jpg', alt: 'Veste de sport', prix: 65, categorie: 'veste', attributs: ['sport', 'léger'], note: 4.8 },
+  { titre: 'T-shirt graphique', image: 'assets/tshirt-graphique.jpg', alt: 'T-shirt graphique', prix: 20, categorie: 'tshirt', attributs: ['imprimé', 'moderne'], note: 4.3 }
+];
 
   const PRODUCTS_PER_PAGE = 9;
   let currentPage = 1;
